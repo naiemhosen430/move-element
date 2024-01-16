@@ -29,17 +29,33 @@
         padding: 100px;
         font-size: 40px;
       }
+      .pointer {
+        padding: 5px;
+        color: white;
+        background-color: black;
+      }
+      .btn {
+        background-color: blue;
+        padding: 10px 20px;
+        color: white;
+        font-weight: 500;
+      }
     </style>
   </head>
   <body>
     <div class="overley" id="overley">
+      <button class="cross" id="cross">Cencel</button>
       <div class="box" id="box">Helloi am overlay</div>
+      <button class="pointer" id="pointer">druh me</button>
     </div>
     <div class="bg">
       Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi est,
       dicta vitae quo sit ex asperiores totam tempore, voluptatibus nobis
       doloremque placeat quas quos repellendus eveniet maxime similique aliquam.
       Et?
+    </div>
+    <div>
+      <button class="btn" id="btn">Start</button>
     </div>
   </body>
   <script>
@@ -70,5 +86,47 @@
       document.addEventListener("mousemove", moveHandler);
       document.addEventListener("mouseup", releaseHandler);
     });
+
+    // hundling cross
+
+    document.getElementById("cross").addEventListener("click", () => {
+      element.style.display = "none";
+    });
+
+    // make small big
+    const incresser = document.getElementById("pointer");
+    let isDraggingToControlWhith = false;
+    incresser.addEventListener("mousemove", (e) => {
+      isDraggingToControlWhith = true;
+      const offsetX = e.clientX - element.getBoundingClientRect().left;
+      const offsetY = e.clientY - element.getBoundingClientRect().top;
+
+      const widthControler = (e) => {
+        if (isDraggingToControlWhith) {
+          const newX = e.clientX - offsetX;
+          const newY = e.clientY - offsetY;
+
+          element.style.left = newX + "px";
+          element.style.top = newY + "px";
+        }
+      };
+
+      console.log({ offsetX });
+      console.log({ offsetY });
+    });
+
+    // open overlay
+    const showOverlay = () => {
+      const newTab = window.open(
+        "https://fontawesome.com/icons/lock?f=classic&s=solid",
+        "_blank",
+        "height=500px,width=500px"
+      );
+
+      element.appendChild(newTab);
+    };
+
+    const btn = document.getElementById("btn");
+    btn.addEventListener("click", showOverlay);
   </script>
 </html>
