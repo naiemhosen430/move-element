@@ -117,13 +117,7 @@
 
     // open overlay
     const showOverlay = () => {
-      const newTab = window.open(
-        "https://fontawesome.com/icons/lock?f=classic&s=solid",
-        "_blank",
-        "height=500px,width=500px"
-      );
-
-      element.appendChild(newTab);
+      element.style.display = "block";
     };
 
     const btn = document.getElementById("btn");
