@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>overlay</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        outline: 0;
+        border: 0;
+      }
+      .overley {
+        position: fixed;
+        top: 200px;
+        background-color: white;
+        padding: 5px;
+      }
+      .box {
+        background-color: gray;
+        height: 200px;
+        width: 400px;
+      }
+      .bg {
+        background-color: black;
+        height: 700px;
+        color: blue;
+        padding: 100px;
+        font-size: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="overley" id="overley">
+      <div class="box" id="box">Helloi am overlay</div>
+    </div>
+    <div class="bg">
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi est,
+      dicta vitae quo sit ex asperiores totam tempore, voluptatibus nobis
+      doloremque placeat quas quos repellendus eveniet maxime similique aliquam.
+      Et?
+    </div>
+  </body>
+  <script>
+    const element = document.getElementById("overley");
+    let isDragging = false;
+
+    element.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      const offsetX = e.clientX - element.getBoundingClientRect().left;
+      const offsetY = e.clientY - element.getBoundingClientRect().top;
+
+      const moveHandler = (e) => {
+        if (isDragging) {
+          const newX = e.clientX - offsetX;
+          const newY = e.clientY - offsetY;
+
+          element.style.left = newX + "px";
+          element.style.top = newY + "px";
+        }
+      };
+
+      const releaseHandler = () => {
+        isDragging = false;
+        document.removeEventListener("mousemove", moveHandler);
+        document.removeEventListener("mouseup", releaseHandler);
+      };
+
+      document.addEventListener("mousemove", moveHandler);
+      document.addEventListener("mouseup", releaseHandler);
+    });
+  </script>
+</html>
